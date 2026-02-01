@@ -3,15 +3,18 @@ import java.util.ArrayList;
 import com.issue.tracker.Model.Issue;
 import com.issue.tracker.Model.Status;
 
+
+
 public class IssueDb {
     private ArrayList<Issue> issueDb=new ArrayList<>();
 
    public IssueDb(Issue issue){
         this.issueDb.add(issue);
-
+    System.out.println(issue);
 
     }
 
+    
     public Issue getIssue(int id){
         for(Issue issue:issueDb){
             if(issue.getId()==id){
@@ -22,7 +25,7 @@ public class IssueDb {
     }
 
     public void setIssue(Issue issue){
-        issueDb.add(issue);
+        this.issueDb.add(issue);
     }
     
 }
