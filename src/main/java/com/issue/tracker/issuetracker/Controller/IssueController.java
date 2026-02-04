@@ -3,6 +3,7 @@ package com.issue.tracker.issuetracker.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.issue.tracker.Model.Issue;
 import com.issue.tracker.Model.User;
 import com.issue.tracker.issuetracker.Service.IssueService;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/issue")
+@CrossOrigin("http://127.0.0.1:5500")
 public class IssueController {
 
    IssueService service;
@@ -29,17 +33,18 @@ public IssueController(IssueService service){
 
 
     @PostMapping("/create")
-    public Issue createIssue(@RequestBody Issue issue){
+    public ResponseEntity<String> createIssue(@RequestBody Issue issue){
         if(issue!=null){
             service.createIssue(issue);
-            return issue;
+            return ResponseEntity.ok().body("Done");
         }
         return null;
     }
 
     @GetMapping("/all")
-    public List<Issue> getAll() {
-        return service.listAll();
+    
+    public ResponseEntity<List<Issue>> getAll() {
+        return ResponseEntity.ok().body(service.listAll());
 
     }
 

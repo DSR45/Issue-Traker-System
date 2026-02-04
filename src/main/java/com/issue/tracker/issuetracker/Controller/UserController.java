@@ -11,6 +11,8 @@ import com.issue.tracker.issuetracker.Service.UserService;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin("http://127.0.0.1:5500")
 public class UserController {
     UserService service;
 
@@ -28,14 +31,15 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public User create(@RequestBody User user){
+    public ResponseEntity<User> create(@RequestBody User user){
         service.createUser(user);
-        return user;
+
+        return ResponseEntity.ok().body(user);
     }
 
     @GetMapping("all")
-    public List<User> getMethodName() {
-        return service.getAlluser();
+    public ResponseEntity<List<User>> getMethodName() {
+        return ResponseEntity.ok().body(service.getAlluser());
     }
     
 
