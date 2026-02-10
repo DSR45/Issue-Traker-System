@@ -1,7 +1,5 @@
 package com.issue.tracker.issuetracker.Controller;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.issue.tracker.Model.Issue;
 import com.issue.tracker.Model.User;
 import com.issue.tracker.issuetracker.Service.IssueService;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
