@@ -56,6 +56,15 @@ public IssueController(IssueService service){
         
         return null;
     }
+
+    @PutMapping("/resolve/{id}")
+    public ResponseEntity<Issue> resolve(@PathVariable int id){
+        if(!String.valueOf(id).isEmpty()){
+            Issue issue=service.Resolve(id);
+            return ResponseEntity.ok().body(issue);
+        }
+        return ResponseEntity.badRequest().body(null);
+    }
     
 
 

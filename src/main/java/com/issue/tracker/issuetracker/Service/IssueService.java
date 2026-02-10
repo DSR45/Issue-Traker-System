@@ -41,9 +41,11 @@ public IssueService(IssueRepository repository){
 
    //update the issue status to resolved if issue exists;
    public Issue Resolve(int id){
-        Issue issue=repository.findById(id);
-        if(issue!=null){
-            issue.setStatus("RESOLVED");
+        
+        if(!String.valueOf(id).isEmpty()&& repository.findById(id)!=null){
+
+            repository.setStatus(id, "Resolved");
+            Issue issue=repository.findById(id);
             return issue;
         }
 
@@ -55,10 +57,11 @@ public IssueService(IssueRepository repository){
 //assign issue to a particular user;
    public Issue assignTo(int id, User user){
         
-        if(user!=null){
-            Issue issue=repository.findById(id);
-            issue.setAssignTo(user);
-            return issue;
+        if(user!=null && !String.valueOf(id).isEmpty()){
+         if(repository.findById(id)!=null){
+            repository.assign(id, user);
+         }
+           
         }
         return null;
    }
