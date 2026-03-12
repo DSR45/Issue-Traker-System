@@ -24,7 +24,7 @@ public IssueService(IssueRepository repository){
 
 
 //create a new issue;
-   public Issue createIssue(Issue issue){
+   public int createIssue(Issue issue){
     if(issue!=null){
         LocalTime time=LocalTime.now();
         
@@ -33,7 +33,7 @@ public IssueService(IssueRepository repository){
         issue.setStatus("OPEN");
         return repository.save(issue);
     }
-    return null;
+    return 0;
 
    }
 
@@ -49,7 +49,7 @@ public IssueService(IssueRepository repository){
             return issue;
         }
 
-        return null;
+        throw new IllegalArgumentException("Empty Id or Not Exists");
    }
 
 
@@ -73,7 +73,16 @@ public IssueService(IssueRepository repository){
         return repository.getAll();
    }
     
-
+   
+   public int delete(int id){
+      int result=repository.remove(id);
+      if(result>0){
+         return 0;
+      }
+      else{
+         return 1;
+      }
+   }
 
 
     

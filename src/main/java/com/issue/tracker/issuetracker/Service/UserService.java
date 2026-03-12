@@ -21,7 +21,8 @@ public UserService(UserRepository repository){
 
 
 public User createUser(User user){
-    System.out.println("hello");
+    
+   
     if(user!=null){
         repository.save(user);
         return user;

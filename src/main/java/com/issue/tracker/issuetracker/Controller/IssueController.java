@@ -1,6 +1,5 @@
 package com.issue.tracker.issuetracker.Controller;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,9 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 
+
+
+
 @RestController
 @RequestMapping("/issue")
-@CrossOrigin("http://127.0.0.1:5500")
+@CrossOrigin("http://localhost:5173/")
 public class IssueController {
 
    IssueService service;
@@ -56,13 +58,27 @@ public IssueController(IssueService service){
 
     @PutMapping("/resolve/{id}")
     public ResponseEntity<Issue> resolve(@PathVariable int id){
-        if(!String.valueOf(id).isEmpty()){
-            Issue issue=service.Resolve(id);
-            return ResponseEntity.ok().body(issue);
-        }
-        return ResponseEntity.badRequest().body(null);
-    }
     
+            Issue issue=service.Resolve(id);
+          if(issue==null){
+            return ResponseEntity.notFound().build();
+          }
+          return ResponseEntity.ok().body(issue);
+        
+        
+    }
+
+    
+    @PutMapping("delete/{id}")
+    public String putMethodName(@PathVariable int id) {
+       int status= service.delete(id);
+       System.out.println(status);
+       if(status!=0){
+        throw new RuntimeException("Failed to delete");
+       }
+        return null;
+    }
+   
 
 
    
